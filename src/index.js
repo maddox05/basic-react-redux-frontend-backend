@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; // react dom shows the react component.
 import App from './App.js';
-import 'semantic-ui-css/semantic.min.css';
+import ReactDOM from 'react-dom/client';
 
 function Main() {
   return (
@@ -11,4 +10,6 @@ function Main() {
   );
 }
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<Main />);

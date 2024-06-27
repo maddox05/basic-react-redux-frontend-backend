@@ -1,37 +1,24 @@
-import './css/App.css';
-
 import React from 'react';
 import { useState } from 'react';
-import AnimalShow from './AnimalShow.js';
 
-function getRandomAnimal() {
-  const animals = ['bird', 'cat', 'cow', 'dog', 'gator', 'horse'];
-  return animals[Math.floor(Math.random() * animals.length)];
-}
+import { getImagesByQuery } from './axios_api';
 
-function App() {
-  const [count, setCount] = useState(0);
-  const [animals, setAnimals] = useState([]);
+export default function App() {
+  const [images, setImages] = useState([]);
 
-  function renderAnimals(animalsArr) {
-    animalsArr = animalsArr.map((animal, index) => {
-      return <AnimalShow type={animal} key={index} />;
-    });
-    return animalsArr;
+  async function handleApiImagesCall() {
+    const arr = await getImagesByQuery('dog');
+    setImages([
+      ...images,
+      arr.map((value, index) => {
+        return <img key={index} alt={value.desc} src={value.link} style={{ maxWidth: 100 + 'px' }} />;
+      }),
+    ]);
   }
-
-  function handleClick() {
-    setCount(count + 1);
-    setAnimals([...animals, getRandomAnimal()]);
-  }
-
   return (
-    <div className='app'>
-      <button onClick={handleClick}>Add Animal</button>
-      <div>Animals Shown: {count}</div>
-      <div className='animal-list'>{renderAnimals(animals)}</div>
-    </div>
+    <React.StrictMode>
+      <button onClick={handleApiImagesCall}>Click Me chat</button>
+      <div>{images}</div>
+    </React.StrictMode>
   );
 }
-
-export default App;
