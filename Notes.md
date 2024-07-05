@@ -1,0 +1,2 @@
+- get value from state not from event
+- give react control of input value, makes it easier for the programmer to change the value of the input now. (controlled inputs)

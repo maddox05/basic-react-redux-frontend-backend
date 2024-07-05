@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ImageShow from './ImageShow';
-import { GridColumn, Grid, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 /**
  *
@@ -9,7 +9,7 @@ import { GridColumn, Grid, Segment } from 'semantic-ui-react';
  */
 function imagesToImageShow(arr) {
   return arr.map(function (value, index) {
-    return <ImageShow desc={value.desc} link={value.link} key={index}></ImageShow>;
+    return <ImageShow desc={value.desc} link={value.link} key={value.id}></ImageShow>;
   });
 }
 

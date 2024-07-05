@@ -3,6 +3,7 @@ import axios from 'axios';
 function mapUnsplashObj(unsplashArr) {
   unsplashArr = unsplashArr.map((obj, index) => {
     return {
+      id: obj?.id,
       desc: obj?.['alt_description'],
       link: obj?.['urls']?.['small'],
     };

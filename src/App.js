@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 import { getImagesByQuery } from './axios_api.js';
 import SearchBar from './components/SearchBar.js';
@@ -11,14 +11,12 @@ export default function App() {
 
   async function handleSearchBarSubmit(value) {
     setLoading(true);
-    console.log('laoding');
     setApiList([...apiList, ...(await getImagesByQuery(value))]);
     setLoading(false);
-    console.log('done');
   }
   return (
     <Segment>
-      <SearchBar handleSubmit={handleSearchBarSubmit} />
+      <SearchBar onSubmit={handleSearchBarSubmit} />
       <Segment basic loading={isLoading}>
         <ImageList objList={apiList}></ImageList>
       </Segment>
