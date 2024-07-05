@@ -1,3 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ImageShow from './ImageShow';
+import { GridColumn, Grid, Segment } from 'semantic-ui-react';
 
-export default function ImageList() {}
+/**
+ *
+ * @param {Array} arr array of a certain object to pass in
+ * @returns {Array[React.Component]}
+ */
+function imagesToImageShow(arr) {
+  return arr.map(function (value, index) {
+    return <ImageShow desc={value.desc} link={value.link} key={index}></ImageShow>;
+  });
+}
+
+export default function ImageList({ objList }) {
+  return (
+    <Segment style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center' }}>
+      {imagesToImageShow(objList)}
+    </Segment>
+  );
+}

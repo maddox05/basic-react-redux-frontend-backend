@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
 import { getImagesByQuery } from './axios_api.js';
 import SearchBar from './components/SearchBar.js';
-
-export function handleSearchBarSubmit(term) {
-  console.log(term);
-  //console.log(await getImagesByQuery(term));
-}
+import ImageList from './components/ImageList.js';
 
 export default function App() {
+  const [apiList, setApiList] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
+  async function handleSearchBarSubmit(value) {
+    setLoading(true);
+    console.log('laoding');
+    setApiList([...apiList, ...(await getImagesByQuery(value))]);
+    setLoading(false);
+    console.log('done');
+  }
   return (
-    <React.StrictMode>
+    <Segment>
       <SearchBar handleSubmit={handleSearchBarSubmit} />
-    </React.StrictMode>
+      <Segment basic loading={isLoading}>
+        <ImageList objList={apiList}></ImageList>
+      </Segment>
+    </Segment>
   );
 }

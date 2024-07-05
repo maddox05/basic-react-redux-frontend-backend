@@ -4,7 +4,7 @@ function mapUnsplashObj(unsplashArr) {
   unsplashArr = unsplashArr.map((obj, index) => {
     return {
       desc: obj?.['alt_description'],
-      link: obj?.['urls']?.['raw'],
+      link: obj?.['urls']?.['small'],
     };
   });
   return unsplashArr;
