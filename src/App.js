@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 
+import reduce from './reducer.js';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 
@@ -8,9 +9,8 @@ function booksToBookComp() {}
 
 export default function App() {
   const [books, setBooks] = useState([]);
-  /**
-   * @param {object}
-   */
+  const [state, dispatch] = useReducer(reduce, []);
+
   function handleCreateBook(title) {
     const book = {
       id: Math.round(Math.random() * 99999),
