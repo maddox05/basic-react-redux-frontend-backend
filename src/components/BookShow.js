@@ -1,40 +1,35 @@
 import React, { useState } from 'react';
-import { Item, Button, Input, Form } from 'semantic-ui-react';
+import { Item, Button, Input, Form, Segment } from 'semantic-ui-react';
+import BookEdit from './BookEdit.js';
 
 export default function BookShow({ id, title, onEdit, onDel }) {
-  const [inputVal, setInputVal] = useState('');
-  const [editOpen, setEditOpen] = useState(false);
+  console.log(title);
+  const [showEdit, setShowEdit] = useState(false);
+
+  function handleEditClick() {
+    setShowEdit(!showEdit);
+  }
+
   return (
     <Item>
       <Item.Image size='tiny' src='https://duckmath.org/assets/img/scaled_goose_pixel.png' />
       <Item.Content>
-        <Item.Header>{title}</Item.Header>
+        <Item.Header>
+          {showEdit ? (
+            <>
+              Title:
+              <BookEdit title={title} id={id} changeShow={handleEditClick} onEdit={onEdit} />
+            </>
+          ) : (
+            <>{title}</>
+          )}
+        </Item.Header>
         <Button
           icon='edit'
           onClick={() => {
-            setEditOpen(!editOpen);
+            setShowEdit(!showEdit);
           }}
         />
-        {editOpen ? (
-          <Form
-            onSubmit={(event) => {
-              event.preventDefault();
-              onEdit(id, inputVal);
-              setInputVal('');
-              setEditOpen(!editOpen);
-            }}
-          >
-            <Button icon='check' />
-            <Input
-              value={inputVal}
-              onChange={(event, data) => {
-                setInputVal(event.target.value);
-              }}
-            />
-          </Form>
-        ) : (
-          <></>
-        )}
 
         <Button
           icon='delete'

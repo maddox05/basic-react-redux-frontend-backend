@@ -24,7 +24,7 @@ export default function App() {
   return (
     <Segment>
       <BookCreate onCreateBook={handleCreateBook} />
-      {/* useContext is next <BookList books={state.books} onEdit={editBook} onDel={deleteBook} /> */}
+      <BookList books={state.books} onEdit={handleEditBook} onDel={handleDeleteBookbyId} />
     </Segment>
   );
 }
