@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BookShow from './BookShow';
+import BookShow from './BookShow.js';
 
 /**
  *

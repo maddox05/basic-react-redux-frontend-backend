@@ -2,42 +2,29 @@ import React, { useReducer, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 
 import reduce from './reducer.js';
-import BookCreate from './components/BookCreate';
-import BookList from './components/BookList';
-
-function booksToBookComp() {}
+import { createBook, deleteBookById, editBookById } from './actions.js';
+import BookCreate from './components/BookCreate.js';
+import BookList from './components/BookList.js';
 
 export default function App() {
-  const [books, setBooks] = useState([]);
-  const [state, dispatch] = useReducer(reduce, []);
+  const [state, dispatch] = useReducer(reduce, { books: [] });
 
-  function handleCreateBook(title) {
-    const book = {
-      id: Math.round(Math.random() * 99999),
-      title,
-    };
-    setBooks([...books, book]);
+  async function handleCreateBook(title) {
+    dispatch(await createBook(title));
   }
-  function handleEditBook(id, newTitle) {
-    const newBooks = books.map((book, index) => {
-      if (book.id === id) {
-        return { ...book, title: newTitle };
-      }
-      return book;
-    });
-    setBooks(newBooks);
+
+  async function handleEditBook(id, newTitle) {
+    dispatch(await editBookById(id, newTitle));
   }
-  function handleDeleteBook(id) {
-    const newBooks = books.filter((book, index) => {
-      return book.id !== id;
-    });
-    setBooks(newBooks);
+
+  async function handleDeleteBookbyId(id) {
+    dispatch(await deleteBookById(id));
   }
 
   return (
     <Segment>
       <BookCreate onCreateBook={handleCreateBook} />
-      <BookList books={books} onEdit={handleEditBook} onDel={handleDeleteBook} />
+      {/* useContext is next <BookList books={state.books} onEdit={editBook} onDel={deleteBook} /> */}
     </Segment>
   );
 }
