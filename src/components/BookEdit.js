@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Segment, Button, Form, Input } from 'semantic-ui-react';
 
-export default function BookEdit({ id, title, changeShow, onEdit }) {
+export default function BookEdit({ id, title, onSubmit }) {
   const [inputVal, setInputVal] = useState(title);
 
   return (
@@ -9,9 +9,8 @@ export default function BookEdit({ id, title, changeShow, onEdit }) {
       <Form
         onSubmit={(event) => {
           event.preventDefault();
-          onEdit(id, inputVal);
+          onSubmit(id, inputVal);
           setInputVal('');
-          changeShow();
         }}
       >
         <Button icon='check' />
