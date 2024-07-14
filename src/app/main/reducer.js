@@ -1,6 +1,10 @@
-import { ADD_BOOK, REMOVE_BOOK, EDIT_BOOK } from './store/actionTypes.js';
+import { ADD_BOOK, REMOVE_BOOK, EDIT_BOOK } from '../store/actionTypes.js';
 
-export default function bookReducer(state, action) {
+const DEFAULT_STATE = {
+  books: [],
+};
+
+export default function bookReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case ADD_BOOK:
       const book = {

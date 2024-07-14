@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Item, Button, Input, Form, Segment } from 'semantic-ui-react';
+import { Item, Button, Segment } from 'semantic-ui-react';
 import BookEdit from './BookEdit.js';
 
 export default function BookShow({ id, title, onEdit, onDel }) {

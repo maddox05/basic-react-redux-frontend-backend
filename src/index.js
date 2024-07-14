@@ -1,11 +1,16 @@
 import React from 'react';
-import App from './App.js';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+
+import App from './app/main/App.js';
+import store from './app/store/index.js';
 
 function Main() {
   return (
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   );
 }
