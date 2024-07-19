@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { createBook, deleteBookById, editBookById } from './actions.js';
 import BookCreate from './components/BookCreate.js';
 import BookList from './components/BookList.js';
+import FlashError from '../sharedComponents/FlashError/index.js';
 
-function App({ books, createBook }) {
-  function handleCreateBook(title) {
-    createBook(title);
-  }
+function App({ books, loading, createBook }) {
+  // function handleCreateBook(title) {
+  //   createBook(title);
+  // }
 
   return (
-    <Segment>
-      <BookCreate onCreateBook={handleCreateBook} />
+    <Segment loading={loading}>
+      <BookCreate onCreateBook={createBook} />
       <BookList books={books} />
     </Segment>
   );
@@ -22,6 +23,7 @@ function App({ books, createBook }) {
 function mapStateToProps(state) {
   return {
     books: state.bookList.books,
+    loading: state.loading.loading,
   };
 }
 

@@ -1,17 +1,16 @@
-import { ADD_BOOK, REMOVE_BOOK, EDIT_BOOK } from '../store/actionTypes.js';
+import { POST_ADD_BOOK, POST_ADD_BOOK_RES, REMOVE_BOOK, EDIT_BOOK } from '../store/actionTypes.js';
 
 const DEFAULT_STATE = {
   books: [],
+  loading: false,
 };
 
 export default function bookReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case ADD_BOOK:
-      const book = {
-        id: action.payload.id,
-        title: action.payload.title,
-      };
-      return { ...state, books: [...state.books, book] };
+    case POST_ADD_BOOK:
+      return { ...state, loading: true };
+    case POST_ADD_BOOK_RES:
+      return { ...state, loading: false, books: [...state.books, action.payload] };
     case EDIT_BOOK:
       const editedBooks = state.books.map((book) => {
         if (book.id === action.payload.id) {
@@ -26,7 +25,6 @@ export default function bookReducer(state = DEFAULT_STATE, action) {
       });
       return { ...state, books: removedBooks };
     default:
-      console.log(`Action ${action.type} Not Found`);
       return state;
   }
 }
