@@ -8,7 +8,7 @@ import { LOADING_OFF, LOADING_ON } from './app/store/actionTypes.js';
  * @param {String} method get post put patch delete
  * @param {String} route where you wanna send data
  * @param {Object} [data] data you wanna send
- * @param {Object} [config] axios config to send the axios get
+ * @param {AxiosRequestConfig} [config] axios config to send the axios get
  * @param {String} [fetchAction] the constant you have in your reducer to do set loading
  * @param {String} loadedState the constant you have in your reducer to set the data
  * @param {String} [errorMsg] error message you want to show on screen if there an error
@@ -25,8 +25,8 @@ export function standardApiCall(
 ) {
   return async function (dispatch) {
     if (fetchAction) dispatch({ type: fetchAction });
+    dispatch({ type: LOADING_ON });
     try {
-      dispatch({ type: LOADING_ON });
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {
         result = (await axios[method.toLowerCase()](route, data, config)).data;
@@ -42,8 +42,8 @@ export function standardApiCall(
       dispatch({ type: LOADING_OFF });
     } catch (error) {
       console.log('catched');
+      //dispatch({ type: LOADING_OFF });
       dispatch(showErrorMessage(error, errorMsg));
-      dispatch({ type: LOADING_OFF });
     }
   };
 }

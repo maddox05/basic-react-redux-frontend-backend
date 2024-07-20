@@ -14,7 +14,7 @@ export default function FlashMessage({ error, message, show, hideMessage, color 
           />
           <Message.Header>{error ? 'An Error has Occured.' : 'Success!'}</Message.Header>
           <p>
-            {message}: {error.toString()}
+            {message}: {error?.toString()}
           </p>
         </Message>
       ) : (

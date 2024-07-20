@@ -1,12 +1,17 @@
-import React, { useReducer, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import { createBook, deleteBookById, editBookById } from './actions.js';
+import { createBook, getAllBooks } from './actions.js';
 import BookCreate from './components/BookCreate.js';
 import BookList from './components/BookList.js';
 
-function App({ books, loading, createBook }) {
+function App({ books, loading, createBook, getAllBooks }) {
+  useEffect(() => {
+    if (!books && !loading) {
+      getAllBooks();
+    }
+  }, [books, loading]);
   // function handleCreateBook(title) {
   //   createBook(title);
   // }
@@ -14,7 +19,7 @@ function App({ books, loading, createBook }) {
   return (
     <Segment loading={loading}>
       <BookCreate onCreateBook={createBook} />
-      <BookList books={books} />
+      {books ? <BookList books={books} /> : null}
     </Segment>
   );
 }
@@ -26,4 +31,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createBook })(App);
+export default connect(mapStateToProps, { createBook, getAllBooks })(App);
