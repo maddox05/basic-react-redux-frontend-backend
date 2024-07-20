@@ -1,20 +1,20 @@
 import React from 'react';
 import { Button, Message } from 'semantic-ui-react';
 
-export default function FlashMessage({ errorMsg = null, msg, show, hideMessage }) {
+export default function FlashMessage({ error, message, show, hideMessage, color }) {
   return (
     <>
       {show ? (
-        <Message floating error={errorMsg} success={!errorMsg}>
+        <Message floating color={color}>
           <Button
             icon='x'
             onClick={() => {
               hideMessage();
             }}
           />
-          <Message.Header>{errorMsg ? 'An Error has Occured.' : 'Success!'}</Message.Header>
+          <Message.Header>{error ? 'An Error has Occured.' : 'Success!'}</Message.Header>
           <p>
-            {msg}: {errorMsg}
+            {message}: {error.toString()}
           </p>
         </Message>
       ) : (

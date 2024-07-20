@@ -26,20 +26,23 @@ export function standardApiCall(
   return async function (dispatch) {
     if (fetchAction) dispatch({ type: fetchAction });
     try {
+      dispatch({ type: LOADING_ON });
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {
         result = (await axios[method.toLowerCase()](route, data, config)).data;
-        dispatch(showSuccessMessage('w'));
+        //dispatch(showSuccessMessage('w'));
       } else if (method === 'get' || method === 'delete') {
         result = (await axios[method.toLowerCase()](route, config)).data;
-        dispatch(showSuccessMessage('w'));
+        //dispatch(showSuccessMessage('w'));
       } else {
-        dispatch(showErrorMessage(`${errorMsg}: ${'bruh'}`, 'red'));
+        dispatch(showErrorMessage(`${errorMsg}: ${'bruh'}`));
         return;
       }
       dispatch({ type: loadedState, payload: result });
+      dispatch({ type: LOADING_OFF });
     } catch (error) {
-      dispatch(showErrorMessage(`${errorMsg}: ${error}`, 'red'));
+      console.log('catched');
+      dispatch(showErrorMessage(error, errorMsg));
       dispatch({ type: LOADING_OFF });
     }
   };

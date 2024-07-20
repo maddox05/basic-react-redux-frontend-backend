@@ -4,7 +4,7 @@ import FlashMessage from '../FlashMessage.js';
 import { hideSuccessMessage } from './actions.js';
 
 function FlashSuccess({ show, msg, hideSuccessMessage }) {
-  return <FlashMessage show={show} msg={msg} hideMessage={hideSuccessMessage} />;
+  return <FlashMessage show={show} message={msg} color={'green'} hideMessage={hideSuccessMessage} />;
 }
 
 function mapStateToProps(state) {

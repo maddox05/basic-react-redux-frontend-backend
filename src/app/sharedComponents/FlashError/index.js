@@ -6,7 +6,7 @@ import { hideFlashMessage } from './actions.js';
 import FlashMessage from '../FlashMessage.js';
 
 function FlashError({ error, errorMsg, show, hideFlashMessage }) {
-  return <FlashMessage msg={errorMsg} errorMsg={error} show={show} hideMessage={hideFlashMessage} />;
+  return <FlashMessage message={errorMsg} error={error} color={'red'} show={show} hideMessage={hideFlashMessage} />;
 }
 
 function mapStateToProps(state) {

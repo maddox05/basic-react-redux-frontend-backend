@@ -1,6 +1,5 @@
-export const ADD_BOOK = 'ADD_BOOK';
-export const EDIT_BOOK = 'EDIT_BOOK';
-export const REMOVE_BOOK = 'REMOVE_BOOK';
+export const FETCH_BOOKS = 'FETCH_BOOKS';
+export const LOAD_BOOKS = 'LOAD_BOOKS';
 
 export const POST_ADD_BOOK = 'POST_ADD_BOOK';
 export const POST_ADD_BOOK_RES = 'POST_ADD_BOOK_SUCCESS';
