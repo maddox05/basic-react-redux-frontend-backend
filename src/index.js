@@ -3,18 +3,16 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { Segment } from 'semantic-ui-react';
 
-import App from './app/main/App.js';
-import store from './app/store/index.js';
-import FlashSuccess from './app/sharedComponents/FlashSuccess/index.js';
-import FlashError from './app/sharedComponents/FlashError/index.js';
+import App from 'src/app/main/App.js';
+import store from 'src/app/store/index.js';
+import FlashMessage from 'src/app/sharedComponents/FlashMessage/index.js';
 
 function Main() {
   return (
     <React.StrictMode>
       <Provider store={store}>
         <Segment basic>
-          <FlashError />
-          <FlashSuccess />
+          <FlashMessage />
         </Segment>
         <App />
       </Provider>

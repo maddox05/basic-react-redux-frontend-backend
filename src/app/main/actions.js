@@ -1,7 +1,6 @@
 import { standardApiCall } from '../../api.js';
 
-import { ADD_BOOK, REMOVE_BOOK, EDIT_BOOK, POST_ADD_BOOK_RES, POST_ADD_BOOK, LOAD_BOOKS } from '../store/actionTypes.js';
-import { showFlashMessage } from '../sharedComponents/FlashError/actions.js';
+import { POST_ADD_BOOK, LOAD_BOOKS } from '../store/actionTypes.js';
 
 export function createBook(title) {
   return standardApiCall(
@@ -9,8 +8,8 @@ export function createBook(title) {
     'http://localhost:3001/api/books/create',
     null,
     { params: { title } },
+    null,
     POST_ADD_BOOK,
-    POST_ADD_BOOK_RES,
     'failed to get book',
   );
 }

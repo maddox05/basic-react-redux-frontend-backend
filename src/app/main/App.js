@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
@@ -7,8 +7,10 @@ import BookCreate from './components/BookCreate.js';
 import BookList from './components/BookList.js';
 
 function App({ books, loading, createBook, getAllBooks }) {
+  const hasFetched = useRef(false);
   useEffect(() => {
-    if (!books && !loading) {
+    if (!books && !loading && !hasFetched.current) {
+      hasFetched.current = true;
       getAllBooks();
     }
   }, [books, loading]);

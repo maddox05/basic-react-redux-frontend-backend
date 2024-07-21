@@ -16,6 +16,5 @@ function mapBooksToShow(books, onEdit, onDel) {
 }
 
 export default function BookList({ books, onEdit, onDel }) {
-  console.log(books);
   return mapBooksToShow(books, onEdit, onDel);
 }

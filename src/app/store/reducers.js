@@ -2,8 +2,7 @@ import { combineReducers } from 'redux';
 import { LOADING_OFF, LOADING_ON } from './actionTypes.js';
 
 import bookList from '../main/reducers.js';
-import errorHandler from '../sharedComponents/FlashError/reducers.js';
-import successHandler from '../sharedComponents/FlashSuccess/reducers.js';
+import flashMessage from '../sharedComponents/FlashMessage/reducers.js';
 
 const DEFAULT_STATE = {
   loading: false,
@@ -20,4 +19,4 @@ function loadingReducer(state = DEFAULT_STATE, action) {
   }
 }
 
-export default combineReducers({ successHandler, errorHandler, bookList, loading: loadingReducer });
+export default combineReducers({ flashMessage, bookList, loading: loadingReducer });

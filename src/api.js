@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { showSuccessMessage } from './app/sharedComponents/FlashSuccess/actions.js';
-import { showErrorMessage } from './app/sharedComponents/FlashError/actions.js';
+import { showFlashMessage } from './app/sharedComponents/FlashMessage/actions.js';
 import { LOADING_OFF, LOADING_ON } from './app/store/actionTypes.js';
 /**
  * A redux thunk standard get
@@ -14,18 +13,11 @@ import { LOADING_OFF, LOADING_ON } from './app/store/actionTypes.js';
  * @param {String} [errorMsg] error message you want to show on screen if there an error
  * @returns dispatches an action to the reducer with a action.payload of the data
  */
-export function standardApiCall(
-  method,
-  route,
-  data = null,
-  config = null,
-  fetchAction = LOADING_ON,
-  loadedState,
-  errorMsg = null,
-) {
+export function standardApiCall(method, route, data = null, config = null, fetchAction = null, loadedState, errorMsg = null) {
   return async function (dispatch) {
-    if (fetchAction) dispatch({ type: fetchAction });
     dispatch({ type: LOADING_ON });
+
+    if (fetchAction) dispatch({ type: fetchAction });
     try {
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {
@@ -35,15 +27,15 @@ export function standardApiCall(
         result = (await axios[method.toLowerCase()](route, config)).data;
         //dispatch(showSuccessMessage('w'));
       } else {
-        dispatch(showErrorMessage(`${errorMsg}: ${'bruh'}`));
+        dispatch(showFlashMessage('axios function not found', 'err'));
         return;
       }
       dispatch({ type: loadedState, payload: result });
       dispatch({ type: LOADING_OFF });
     } catch (error) {
-      console.log('catched');
       //dispatch({ type: LOADING_OFF });
-      dispatch(showErrorMessage(error, errorMsg));
+      console.log(error);
+      dispatch(showFlashMessage('rip', String(error)));
     }
   };
 }
