@@ -1,7 +1,7 @@
 import { standardApiCall } from '../../api.js';
 import { showFlashMessage } from '../sharedComponents/FlashMessage/actions.js';
 
-import { POST_ADD_BOOK, LOAD_BOOKS } from '../store/actionTypes.js';
+import { ADD_BOOK, DELETE_BOOK, LOAD_BOOKS, UPDATE_BOOK } from '../store/actionTypes.js';
 
 export function createBook(title) {
   if (!title)
@@ -14,11 +14,35 @@ export function createBook(title) {
     null,
     { params: { title } },
     null,
-    POST_ADD_BOOK,
+    ADD_BOOK,
     'failed to get book',
   );
 }
 
 export function getAllBooks() {
   return standardApiCall('get', 'http://localhost:3001/api/books/', null, null, null, LOAD_BOOKS, 'failed to get books');
+}
+
+export function updateBookById(id, newTitle) {
+  return standardApiCall(
+    'patch',
+    'http://localhost:3001/api/books/update',
+    null,
+    { params: { newTitle, id } },
+    null,
+    UPDATE_BOOK,
+    'failed to update book',
+  );
+}
+
+export function deleteBookById(id) {
+  return standardApiCall(
+    'patch',
+    'http://localhost:3001/api/books/delete',
+    null,
+    { params: { id } },
+    null,
+    DELETE_BOOK,
+    'failed to delete book',
+  );
 }

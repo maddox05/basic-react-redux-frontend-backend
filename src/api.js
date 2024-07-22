@@ -22,10 +22,8 @@ export function standardApiCall(method, route, data = null, config = null, fetch
       let result = null;
       if (method === 'post' || method === 'put' || method === 'patch') {
         result = (await axios[method.toLowerCase()](route, data, config)).data;
-        //dispatch(showSuccessMessage('w'));
       } else if (method === 'get' || method === 'delete') {
         result = (await axios[method.toLowerCase()](route, config)).data;
-        //dispatch(showSuccessMessage('w'));
       } else {
         dispatch(showFlashMessage('axios function not found', 'err'));
         return;

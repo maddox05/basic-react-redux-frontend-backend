@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
-import { createBook, getAllBooks } from './actions.js';
+import { createBook, deleteBookById, getAllBooks, updateBookById } from './actions.js';
 import BookCreate from './components/BookCreate.js';
 import BookList from './components/BookList.js';
 
-function App({ books, loading, createBook, getAllBooks }) {
+function App({ books, loading, createBook, getAllBooks, updateBookById, deleteBookById }) {
   const hasFetched = useRef(false);
   useEffect(() => {
     if (!books && !loading && !hasFetched.current) {
@@ -14,14 +14,11 @@ function App({ books, loading, createBook, getAllBooks }) {
       getAllBooks();
     }
   }, [books, loading, getAllBooks]);
-  // function handleCreateBook(title) {
-  //   createBook(title);
-  // }
 
   return (
     <Segment>
       <BookCreate onCreateBook={createBook} />
-      {books ? <BookList loading={loading} books={books} /> : null}
+      {books ? <BookList loading={loading} books={books} onEdit={updateBookById} onDel={deleteBookById} /> : null}
     </Segment>
   );
 }
@@ -33,4 +30,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createBook, getAllBooks })(App);
+export default connect(mapStateToProps, { createBook, getAllBooks, updateBookById, deleteBookById })(App);
