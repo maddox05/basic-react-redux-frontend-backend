@@ -1,4 +1,4 @@
-import { FLASH_HIDE, FLASH_SHOW } from 'src/app/store/actionTypes';
+import { HIDE_FLASH, SHOW_FLASH } from 'src/app/store/actionTypes';
 
 const DEFAULT_STATE = {
   show: false,
@@ -8,9 +8,9 @@ const DEFAULT_STATE = {
 
 export default function FlashReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case FLASH_SHOW:
+    case SHOW_FLASH:
       return { ...state, show: true, msg: action.payload.msg, error: action.payload.error };
-    case FLASH_HIDE:
+    case HIDE_FLASH:
       return { ...state, DEFAULT_STATE, show: false };
     default:
       return state;

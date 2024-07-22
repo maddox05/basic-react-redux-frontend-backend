@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BookShow from './BookShow.js';
+import { Segment } from 'semantic-ui-react';
 
 /**
  *
@@ -15,6 +16,10 @@ function mapBooksToShow(books, onEdit, onDel) {
   });
 }
 
-export default function BookList({ books, onEdit, onDel }) {
-  return mapBooksToShow(books, onEdit, onDel);
+export default function BookList({ books, onEdit, onDel, loading }) {
+  return (
+    <Segment basic loading={loading}>
+      {mapBooksToShow(books, onEdit, onDel)}
+    </Segment>
+  );
 }

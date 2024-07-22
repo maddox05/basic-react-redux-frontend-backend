@@ -13,15 +13,15 @@ function App({ books, loading, createBook, getAllBooks }) {
       hasFetched.current = true;
       getAllBooks();
     }
-  }, [books, loading]);
+  }, [books, loading, getAllBooks]);
   // function handleCreateBook(title) {
   //   createBook(title);
   // }
 
   return (
-    <Segment loading={loading}>
+    <Segment>
       <BookCreate onCreateBook={createBook} />
-      {books ? <BookList books={books} /> : null}
+      {books ? <BookList loading={loading} books={books} /> : null}
     </Segment>
   );
 }

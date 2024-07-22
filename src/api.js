@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { showFlashMessage } from './app/sharedComponents/FlashMessage/actions.js';
-import { LOADING_OFF, LOADING_ON } from './app/store/actionTypes.js';
+import { LOADING_OFF, LOADING_ON, HIDE_FLASH } from './app/store/actionTypes.js';
 /**
  * A redux thunk standard get
  *
@@ -32,10 +32,10 @@ export function standardApiCall(method, route, data = null, config = null, fetch
       }
       dispatch({ type: loadedState, payload: result });
       dispatch({ type: LOADING_OFF });
+      dispatch({ type: HIDE_FLASH });
     } catch (error) {
-      //dispatch({ type: LOADING_OFF });
       console.log(error);
-      dispatch(showFlashMessage('rip', String(error)));
+      dispatch(showFlashMessage('oh no bro', String(error)));
     }
   };
 }

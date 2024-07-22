@@ -1,8 +1,8 @@
-import { FLASH_HIDE, FLASH_SHOW } from 'src/app/store/actionTypes';
+import { HIDE_FLASH, SHOW_FLASH } from 'src/app/store/actionTypes';
 
 export function showFlashMessage(msg, error) {
   return {
-    type: FLASH_SHOW,
+    type: SHOW_FLASH,
     payload: {
       msg,
       error,
@@ -11,5 +11,5 @@ export function showFlashMessage(msg, error) {
 }
 
 export function hideFlashMessage() {
-  return { type: FLASH_HIDE };
+  return { type: HIDE_FLASH };
 }
