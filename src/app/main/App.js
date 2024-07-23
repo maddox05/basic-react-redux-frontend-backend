@@ -9,7 +9,7 @@ import BookList from './components/BookList.js';
 function App({ books, loading, getAllBooks }) {
   const hasFetched = useRef(false);
   useEffect(() => {
-    if (!books && !loading && !hasFetched.current) {
+    if (!hasFetched.current && !books && !loading) {
       hasFetched.current = true;
       getAllBooks();
     }
@@ -18,7 +18,7 @@ function App({ books, loading, getAllBooks }) {
   return (
     <Segment>
       <BookCreate />
-      {books ? <BookList loading={loading} books={books} /> : null}
+      {books ? <BookList /> : null}
     </Segment>
   );
 }
