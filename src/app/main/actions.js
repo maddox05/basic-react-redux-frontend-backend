@@ -37,7 +37,7 @@ export function updateBookById(id, newTitle) {
 
 export function deleteBookById(id) {
   return standardApiCall(
-    'patch',
+    'delete',
     'http://localhost:3001/api/books/delete',
     null,
     { params: { id } },

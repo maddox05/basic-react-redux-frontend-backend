@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Form } from 'semantic-ui-react';
+import { createBook } from '../actions.js';
 
-export default function BookCreate({ onCreateBook }) {
+function BookCreate({ createBook }) {
   const [inputVal, setInputVal] = useState('');
   return (
     <div>
       <Form
         onSubmit={(event, data) => {
           event.preventDefault();
-          onCreateBook(inputVal);
+          createBook(inputVal);
           setInputVal('');
         }}
       >
@@ -18,3 +20,5 @@ export default function BookCreate({ onCreateBook }) {
     </div>
   );
 }
+
+export default connect(null, { createBook })(BookCreate);

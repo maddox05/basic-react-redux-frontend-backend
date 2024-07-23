@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Segment, Button, Form, Input } from 'semantic-ui-react';
+import { updateBookById } from '../actions.js';
 
-export default function BookEdit({ id, title, onSubmit }) {
+function BookEdit({ id, title, updateBookById, onSubmit }) {
   const [inputVal, setInputVal] = useState(title);
 
   return (
@@ -9,7 +11,8 @@ export default function BookEdit({ id, title, onSubmit }) {
       <Form
         onSubmit={(event) => {
           event.preventDefault();
-          onSubmit(id, inputVal);
+          onSubmit();
+          updateBookById(id, inputVal);
           setInputVal('');
         }}
       >
@@ -24,3 +27,5 @@ export default function BookEdit({ id, title, onSubmit }) {
     </>
   );
 }
+
+export default connect(null, { updateBookById })(BookEdit);

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Item, Button, Segment } from 'semantic-ui-react';
 import BookEdit from './BookEdit.js';
+import { deleteBookById } from '../actions.js';
 
-export default function BookShow({ id, title, onEdit, onDel }) {
+function BookShow({ id, title, deleteBookById }) {
   const [showEdit, setShowEdit] = useState(false);
 
   function handleEditClick(id, newTitle) {
-    onEdit(id, newTitle);
     setShowEdit(!showEdit);
   }
 
@@ -36,7 +37,7 @@ export default function BookShow({ id, title, onEdit, onDel }) {
             icon='delete'
             onClick={() => {
               // on click takes in a function and passes it event , data.
-              onDel(id);
+              deleteBookById(id);
             }}
           />
         </Item.Content>
@@ -44,3 +45,5 @@ export default function BookShow({ id, title, onEdit, onDel }) {
     </Segment>
   );
 }
+
+export default connect(null, { deleteBookById })(BookShow);
